@@ -1,43 +1,126 @@
-# Math Expression Interpreter
+# CE326 HW1 — Expression Interpreter
 
-This is a simple Java-based interpreter that can parse and evaluate mathematical expressions. It supports basic arithmetic operations, variable assignments, and can be run interactively or by reading commands from a file.
+A simple interpreter for arithmetic expressions written in Java. Supports variable assignment, basic math operations, and two run modes: interactive (REPL) and file-based.
+
+---
 
 ## Features
 
-* **Arithmetic Operations:** Supports addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), and exponentiation (`^`).
-* **Variables:** Allows assigning results to variables (e.g., `x = 5 + 3;`) and using them in subsequent expressions.
-* **Parentheses:** Supports the use of `()` to enforce precedence.
-* **Two Execution Modes:**
-    * **REL Mode:** An interactive command-line interface.
-    * **File Mode:** Reads and executes statements sequentially from a text file.
+- Interactive REPL mode (Read-Eval-Print Loop)
+- File execution mode
+- Variable assignment and reuse
+- Arithmetic operators: `+`, `-`, `*`, `/`, `^` (power)
+- Operator precedence and parentheses
+- Reverse Polish Notation (RPN/Shoehorn algorithm) for expression evaluation
+- Descriptive error messages with line numbers (in file mode)
 
-## Prerequisites
+---
 
-* Java Development Kit (JDK) 8 or higher installed on your system.
+## Project Structure
 
-## Download and Setup
+```
+ce326/hw1/
+├── Interpreter.java      # Entry point, handles REPL and file mode
+├── Parser.java           # Parses and validates input lines
+├── Instruction.java      # Tokenizes, converts to RPN, and evaluates expressions
+└── ParserException.java  # Custom exception with optional line number
+```
 
-1.  **Clone the repository** (if you are hosting it on Git):
-    ```bash
-    git clone <your_repository_URL>
-    cd <repository_directory>
-    ```
-    *(Alternatively, download the source files and ensure they are placed in a `src/ce326/hw1` directory structure).*
+---
 
-2.  **Compile the code:**
-    Navigate to the `src` directory and compile the Java files.
-    ```bash
-    cd src
-    javac ce326/hw1/*.java
-    ```
+## How to Compile
 
-## Usage
+From the root of the project (the directory containing the `ce326/` folder):
 
-Make sure you are in the `src` directory where the compiled `.class` files reside.
+```bash
+javac ce326/hw1/*.java
+```
 
-### 1. Interactive Mode (REL)
+---
 
-To run the interpreter interactively, execute the program without any arguments:
+## How to Run
+
+### Interactive / REPL Mode
+
+Run with no arguments to start an interactive session:
 
 ```bash
 java ce326.hw1.Interpreter
+```
+
+You'll see a `>` prompt. Type expressions ending with `;` and press Enter.
+
+```
+> 2 + 3;
+  5
+> x = 10;
+> x * 2;
+  20
+> x = x + 5;
+> x;
+  15
+```
+
+Exit with `Ctrl+D` (EOF).
+
+### File Mode
+
+Pass a `.txt` (or any text) file as an argument:
+
+```bash
+java ce326.hw1.Interpreter myfile.txt
+```
+
+Each line in the file should be a valid expression ending with `;`. Errors will be reported with their line number.
+
+**Example file (`myfile.txt`):**
+```
+x = 5;
+y = x ^ 2;
+y + 1;
+```
+
+**Output:**
+```
+  26
+```
+
+---
+
+## Syntax Rules
+
+| Rule | Example |
+|------|---------|
+| Every statement must end with `;` | `x = 5;` |
+| Assignment uses `=` | `result = 3 * 4;` |
+| Print a value (no assignment) | `result;` or `2 + 2;` |
+| Supports parentheses | `(2 + 3) * 4;` |
+| Multiple statements per line | `x = 1; y = 2;` |
+| Variables are lowercase or uppercase letters | `myVar`, `x`, `ABC` |
+
+---
+
+## Error Handling
+
+The interpreter will report errors without crashing:
+
+| Error | Message |
+|-------|---------|
+| Missing `;` | `Expecting ; at the end of line` |
+| Unknown variable | `Unknown variable x` |
+| Mismatched parentheses | `Expecting ( before closing` |
+| Consecutive operators | `Expecting operand between operators` |
+| Multiple `=` in one expression | `Multiple assignment operator in expression` |
+
+In file mode, errors include the line number, e.g.:
+```
+Line 3: Unknown variable z
+```
+
+---
+
+## Notes
+
+- Integer results are printed without decimals: `5`
+- Floating-point results are printed to 6 decimal places: `3.141593`
+- Variables persist for the entire session (REPL) or file execution
