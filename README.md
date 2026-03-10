@@ -34,7 +34,7 @@ ce326/hw1/
 
 ```bash
 git clone git@github.com:zoumold/Java-Custom-Maths-Interpreter.git
-cd YOUR_REPO_NAME
+cd Java-Custom-Maths-Interpreter
 ```
 
 Or, if you prefer to download without Git, click **Code → Download ZIP** on the GitHub page, then unzip and `cd` into the folder.
