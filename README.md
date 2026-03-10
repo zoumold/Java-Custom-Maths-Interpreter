@@ -28,6 +28,24 @@ ce326/hw1/
 
 ---
 
+## Getting Started
+
+### Prerequisites
+
+- [Java JDK 8+](https://www.oracle.com/java/technologies/downloads/) installed
+- [Git](https://git-scm.com/downloads) installed
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd YOUR_REPO_NAME
+```
+
+Or, if you prefer to download without Git, click **Code → Download ZIP** on the GitHub page, then unzip and `cd` into the folder.
+
+---
+
 ## How to Compile
 
 From the root of the project (the directory containing the `ce326/` folder):
