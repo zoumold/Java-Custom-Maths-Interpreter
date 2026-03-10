@@ -30,15 +30,10 @@ ce326/hw1/
 
 ## Getting Started
 
-### Prerequisites
-
-- [Java JDK 8+](https://www.oracle.com/java/technologies/downloads/) installed
-- [Git](https://git-scm.com/downloads) installed
-
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git clone git@github.com:zoumold/Java-Custom-Maths-Interpreter.git
 cd YOUR_REPO_NAME
 ```
 
